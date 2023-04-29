@@ -1,12 +1,18 @@
 package space.jay.wirebarley.feature.exchangeRateCalculation
 
 import android.widget.NumberPicker
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Alignment
@@ -29,30 +35,41 @@ fun ScreenExchangeRateCalculation(
 ) {
 
     Column(modifier = modifier) {
-        Spacer(modifier = Modifier.height(32.dp))
+        // 타이틀
         Text(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
+            modifier = Modifier
+                .padding(top = 32.dp)
+                .align(Alignment.CenterHorizontally),
             text = stringResource(id = R.string.exchange_rate_calculation),
             style = MaterialTheme.typography.titleLarge
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        // 송금 국가
         TextContentDetail(title = R.string.remittance_country, content = stateUI.fromSelectedCountry.quote)
-        Spacer(modifier = Modifier.height(24.dp))
+        // 수취 국가
         TextContentDetail(title = R.string.recipient_country, content = stateUI.toSelectedCountry.quote)
-        Spacer(modifier = Modifier.height(24.dp))
+        // 환율
         TextContentDetail(title = R.string.exchange_rate, content = stateUI.exchangeRate)
-        Spacer(modifier = Modifier.height(24.dp))
+        //조회 시간
         TextContentDetail(title = R.string.check_time, content = stateUI.checkTime)
 
         if (stateUI is StateUIExchangedRateCalculation.HasCurrency) {
-            Spacer(modifier = Modifier.height(24.dp))
+            // 송금액
             TextContentRemittanceAmount(
                 exchangeAmount = stateUI.exchangeAmount,
                 onChangedExchangeAmount = onChangedExchangeAmount,
                 quote = stateUI.fromSelectedCountry.quote,
                 errorMessage = stateUI.errorMessageExchangedAmount
             )
-            Text(text = stateUI.receivedAmount)
+
+            // 수취 금액
+            Text(
+                modifier = Modifier
+                    .padding(top = 48.dp)
+                    .fillMaxWidth(),
+                text = stateUI.receivedAmount,
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center
+            )
         }
 
         Spacer(modifier = Modifier.weight(1f))
@@ -62,7 +79,11 @@ fun ScreenExchangeRateCalculation(
 
 @Composable
 fun TextContentDetail(title : Int, content : String) {
-    Row(modifier = Modifier.fillMaxWidth()) {
+    Row(
+        modifier = Modifier
+            .padding(top = 24.dp)
+            .fillMaxWidth()
+    ) {
         TextContentTitle(title = title)
         Text(
             modifier = Modifier.weight(3f),
@@ -72,7 +93,6 @@ fun TextContentDetail(title : Int, content : String) {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextContentRemittanceAmount(
     exchangeAmount : String,
@@ -80,15 +100,22 @@ fun TextContentRemittanceAmount(
     quote : String,
     errorMessage : ErrorMessage?
 ) {
-    Row(modifier = Modifier.fillMaxWidth()) {
+    Row(
+        modifier = Modifier
+            .padding(top = 24.dp)
+            .fillMaxWidth()
+    ) {
         TextContentTitle(title = R.string.remittance_amount)
         Column(modifier = Modifier.weight(3f)) {
             Row {
-                TextField(
-                    modifier = Modifier.weight(1f),
+                BasicTextField(
+                    modifier = Modifier
+                        .weight(1f)
+                        .border(width = 1.dp, color = MaterialTheme.colorScheme.onBackground)
+                        .padding(horizontal = 2.dp),
                     value = exchangeAmount,
                     onValueChange = onChangedExchangeAmount,
-                    textStyle = MaterialTheme.typography.bodyMedium,
+                    textStyle = MaterialTheme.typography.bodyMedium.copy(textAlign = TextAlign.End),
                     keyboardOptions = KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.NumberPassword,
                         imeAction = ImeAction.Done
@@ -96,7 +123,7 @@ fun TextContentRemittanceAmount(
                 )
                 Text(
                     modifier = Modifier.weight(2f),
-                    text = quote,
+                    text = " $quote",
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
