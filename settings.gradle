@@ -1,0 +1,24 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Wirebarley"
+include([
+        ":app",
+        ":core:common",
+        ":core:data",
+        ":core:domain",
+        ":core:model",
+        ":core:network",
+        ":feature:exchangeRateCalculation",
+])

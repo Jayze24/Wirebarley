@@ -1,0 +1,5 @@
+<resources>
+    <string name="please_enter_amount">송금액을 입력해 주세요</string>
+    <string name="amount_not_correct">송금액이 바르지 않습니다</string>
+    <string name="not_contain_exchange_rate">데이터에 해당 국가의 환율 정보가 존재하지 않습니다</string>
+</resources>

@@ -1,0 +1,9 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-kapt'
+
+apply from: "$rootDir/gradle/_sdk.gradle"
+
+dependencies {
+    implementation "androidx.core:core-ktx:1.10.0"
+}

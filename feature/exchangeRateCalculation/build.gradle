@@ -1,0 +1,14 @@
+apply from: "$rootDir/gradle/_library.gradle"
+apply from: "$rootDir/gradle/hilt.gradle"
+apply from: "$rootDir/gradle/compose.gradle"
+apply from: "$rootDir/gradle/testLocal.gradle"
+
+android {
+    namespace 'space.jay.wirebarley.feature.exchangeRateCalculation'
+}
+
+dependencies {
+    implementation(project(":core:common"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:model"))
+}

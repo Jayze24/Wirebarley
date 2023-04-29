@@ -1,0 +1,12 @@
+apply from: "$rootDir/gradle/_library.gradle"
+apply from: "$rootDir/gradle/hilt.gradle"
+
+android {
+    namespace 'space.jay.wirebarley.core.data'
+}
+
+dependencies {
+    implementation(project(":core:common"))
+    implementation(project(":core:network"))
+    implementation(project(":core:model"))
+}

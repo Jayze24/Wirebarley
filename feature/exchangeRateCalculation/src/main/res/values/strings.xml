@@ -1,0 +1,12 @@
+<resources>
+    <string name="exchange_rate_calculation">환율 계산</string>
+    <string name="remittance_country">송금국가</string>
+    <string name="recipient_country">수취국가</string>
+    <string name="exchange_rate">환율</string>
+    <string name="check_time">조회시간</string>
+    <string name="remittance_amount">송금액</string>
+    <string name="error_incorrect_remittance_amount">송금액이 바르지 않습니다</string>
+    <string name="received_amount">수취금액은 %s %s 입니다</string>
+    <string name="loading">Loading…</string>
+    <string name="unknown">알수 없음</string>
+</resources>

@@ -1,0 +1,42 @@
+apply from: "$rootDir/gradle/_application.gradle"
+apply from: "$rootDir/gradle/hilt.gradle"
+apply from: "$rootDir/gradle/compose.gradle"
+
+android {
+    namespace 'space.jay.wirebarley'
+
+    defaultConfig {
+        applicationId "space.jay.wirebarley"
+        versionCode 1
+        versionName "1.0"
+
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    implementation(project(":core:common"))
+    implementation(project(":core:model"))
+    implementation(project(":feature:exchangeRateCalculation"))
+}

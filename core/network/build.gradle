@@ -1,0 +1,14 @@
+apply from: "$rootDir/gradle/_library.gradle"
+apply from: "$rootDir/gradle/hilt.gradle"
+apply from: "$rootDir/gradle/retrofit.gradle"
+apply from: "$rootDir/gradle/testLocal.gradle"
+apply from: "$rootDir/gradle/testLocalServer.gradle"
+
+android {
+    namespace 'space.jay.wirebarley.core.network'
+}
+
+dependencies {
+    implementation(project(":core:common"))
+    implementation(project(":core:model"))
+}
