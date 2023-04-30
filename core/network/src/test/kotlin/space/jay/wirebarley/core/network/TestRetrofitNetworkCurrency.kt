@@ -46,7 +46,7 @@ class TestRetrofitNetworkCurrency {
 
     @Test
     fun getCurrency_success_data_convert_to_entity() = runBlocking {
-        val fakeTimestamp = 1682477884
+        val fakeTimestamp = 1680325294
         val fakeSource = "USD"
         val fakeKRW = 1336.965023
         val fakeJPY = 133.584497
@@ -81,7 +81,7 @@ class TestRetrofitNetworkCurrency {
             assertThat(data.quotes[TypeCountryAndQuote.KOREA]).isEqualTo(fakeKRW)
             assertThat(data.quotes[TypeCountryAndQuote.JAPAN]).isEqualTo(fakeJPY)
             assertThat(data.quotes[TypeCountryAndQuote.PHILIPPINES]).isEqualTo(fakePHP)
-            assertThat(data.timeMillis?.toDataFormat()).isEqualTo("2023-04-26 11:58")
+            assertThat(data.timeMillis?.toDataFormat()).isEqualTo("2023-04-01 14:01")
         }
     }
 
