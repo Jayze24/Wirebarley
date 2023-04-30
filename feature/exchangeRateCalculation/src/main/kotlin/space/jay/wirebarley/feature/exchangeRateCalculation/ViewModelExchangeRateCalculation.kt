@@ -1,11 +1,9 @@
 package space.jay.wirebarley.feature.exchangeRateCalculation
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -23,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelExchangeRateCalculation @Inject constructor(
-    private val application: Application,
+    private val application : Application,
     private val useCaseGetCurrency : UseCaseGetCurrency,
     private val useCaseGetExchangeRateCalculation : UseCaseGetExchangeRateCalculation
 ) : ViewModel() {
@@ -63,9 +61,11 @@ class ViewModelExchangeRateCalculation @Inject constructor(
     }
 
     fun setExchangeAmount(amount : String) {
-        stateViewModelExchangedRateCalculation.update { it.copy(exchangeAmount = amount) }
+        val amountNumber = if (amount.isEmpty()) "" else amount.filter { it.isDigit() }.take(5).toInt().toString()
+        stateViewModelExchangedRateCalculation.update { it.copy(exchangeAmount = amountNumber) }
         requestExchangedAmount()
     }
+
     private fun requestExchangedAmount() {
         stateViewModelExchangedRateCalculation.update { state ->
             when (val result = useCaseGetExchangeRateCalculation(state.exchangeAmount, state.currency?.quotes?.get(state.toSelectedCountry))) {
