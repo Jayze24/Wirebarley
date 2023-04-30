@@ -35,7 +35,7 @@ fun ScreenExchangeRateCalculation(
     onChangedCountry : (TypeCountryAndQuote) -> Unit,
     onGetCurrency : () -> Unit
 ) {
-
+    val context = LocalContext.current
     Column(modifier = modifier) {
         // 타이틀
         Text(
@@ -46,9 +46,9 @@ fun ScreenExchangeRateCalculation(
             style = MaterialTheme.typography.titleLarge
         )
         // 송금 국가
-        TextContentDetail(title = R.string.remittance_country, content = stateUI.fromSelectedCountry.quote)
+        TextContentDetail(title = R.string.remittance_country, content = stateUI.fromSelectedCountry.toFullMark(context))
         // 수취 국가
-        TextContentDetail(title = R.string.recipient_country, content = stateUI.toSelectedCountry.quote)
+        TextContentDetail(title = R.string.recipient_country, content = stateUI.toSelectedCountry.toFullMark(context))
         // 환율
         TextContentDetail(title = R.string.exchange_rate, content = stateUI.exchangeRate)
         //조회 시간
