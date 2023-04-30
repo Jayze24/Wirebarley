@@ -27,6 +27,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import space.jay.wirebarley.core.common.visualTransformation.VisualTransformationPrice
 import space.jay.wirebarley.core.common.wapper.ErrorMessage
 import space.jay.wirebarley.core.model.TypeCountryAndQuote
+import space.jay.wirebarley.core.model.toFullMark
 
 @Composable
 fun ScreenExchangeRateCalculation(
@@ -166,7 +167,7 @@ fun PickerCountry(
             NumberPicker(context).apply {
                 minValue = 0
                 maxValue = stateUI.listAvailableCountry.lastIndex
-                displayedValues = stateUI.listAvailableCountry.map { it.quote }.toTypedArray()
+                displayedValues = stateUI.listAvailableCountry.map { it.toFullMark(context) }.toTypedArray()
                 setOnValueChangedListener { _, oldVal, newVal ->
                     if (oldVal != newVal) onChangedCountry(stateUI.listAvailableCountry[newVal])
                 }

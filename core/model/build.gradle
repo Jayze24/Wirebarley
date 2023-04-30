@@ -1,3 +1,5 @@
-plugins {
-    id 'org.jetbrains.kotlin.jvm'
+apply from: "$rootDir/gradle/_library.gradle"
+
+android {
+    namespace 'space.jay.wirebarley.core.model'
 }
