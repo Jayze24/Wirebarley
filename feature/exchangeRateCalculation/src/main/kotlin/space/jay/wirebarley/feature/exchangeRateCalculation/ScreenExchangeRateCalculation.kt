@@ -20,9 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import space.jay.wirebarley.core.common.visualTransformation.VisualTransformationPrice
 import space.jay.wirebarley.core.common.wapper.ErrorMessage
 import space.jay.wirebarley.core.model.TypeCountryAndQuote
 
@@ -119,7 +121,8 @@ fun TextContentRemittanceAmount(
                     keyboardOptions = KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.NumberPassword,
                         imeAction = ImeAction.Done
-                    )
+                    ),
+                    visualTransformation = VisualTransformationPrice()
                 )
                 Text(
                     modifier = Modifier.weight(2f),
