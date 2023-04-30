@@ -1,4 +1,4 @@
-package space.jay.wirebarley
+package space.jay.wirebarley.ui.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,14 +8,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import space.jay.wirebarley.feature.exchangeRateCalculation.ScreenExchangeRateCalculation
-import space.jay.wirebarley.feature.exchangeRateCalculation.ViewModelExchangeRateCalculation
 import space.jay.wirebarley.ui.theme.WirebarleyTheme
 
 @AndroidEntryPoint
@@ -23,16 +19,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController = rememberNavController()
             WirebarleyTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    val viewModel : ViewModelExchangeRateCalculation = hiltViewModel()
-                    val stateUI by viewModel.stateUIExchangedRateCalculation.collectAsState()
-                    ScreenExchangeRateCalculation(
-                        stateUI = stateUI,
-                        onChangedExchangeAmount = viewModel::setExchangeAmount,
-                        onChangedCountry = viewModel::selectCountry,
-                        onGetCurrency = viewModel::getCurrency
-                    )
+                    NavHostMain(navController = navController)
                 }
             }
         }
