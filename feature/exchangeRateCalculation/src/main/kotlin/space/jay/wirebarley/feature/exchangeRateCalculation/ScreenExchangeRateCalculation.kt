@@ -17,6 +17,8 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -150,11 +152,13 @@ fun TextContentRemittanceAmount(
 
 @Composable
 fun RowScope.TextContentTitle(title : Int) {
+    val text = stringResource(id = title)
     Text(
         modifier = Modifier
             .defaultMinSize(120.dp)
-            .weight(1f),
-        text = "${stringResource(id = title)} : ",
+            .weight(1f)
+            .semantics { contentDescription = text },
+        text = "$text : ",
         style = MaterialTheme.typography.bodyMedium,
         textAlign = TextAlign.End
     )
