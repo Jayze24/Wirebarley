@@ -172,7 +172,7 @@ fun ColumnScope.ButtonRefreshCurrency(
             .align(CenterHorizontally),
         onClick = onGetCurrency
     ) {
-        Text(text = "최신 환율 받기")
+        Text(text = stringResource(id = R.string.get_latest_exchange_rates))
     }
 }
 
