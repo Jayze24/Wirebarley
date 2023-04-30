@@ -1,6 +1,7 @@
 package space.jay.wirebarley.feature.exchangeRateCalculation
 
 import android.widget.NumberPicker
+import android.widget.Toast
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
@@ -9,14 +10,15 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -77,6 +79,9 @@ fun ScreenExchangeRateCalculation(
         Spacer(modifier = Modifier.weight(1f))
         // 국가 선택
         PickerCountry(stateUI = stateUI, onChangedCountry = onChangedCountry)
+
+        // 통신 실패시 토스트 띄우기
+        ShowErrorMessageFromNoCurrency(stateUI = stateUI)
     }
 }
 
@@ -190,4 +195,14 @@ fun PickerCountry(
             }
         }
     )
+}
+
+@Composable
+fun ShowErrorMessageFromNoCurrency(stateUI : StateUIExchangedRateCalculation) {
+    if (stateUI is StateUIExchangedRateCalculation.NoCurrency && stateUI.errorMessageCurrency != null) {
+        val context = LocalContext.current
+        LaunchedEffect(key1 = stateUI.errorMessageCurrency.id) {
+            Toast.makeText(context, stateUI.errorMessageCurrency.message, Toast.LENGTH_LONG).show()
+        }
+    }
 }
