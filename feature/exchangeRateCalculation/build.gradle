@@ -2,6 +2,7 @@ apply from: "$rootDir/gradle/_library.gradle"
 apply from: "$rootDir/gradle/hilt.gradle"
 apply from: "$rootDir/gradle/compose.gradle"
 apply from: "$rootDir/gradle/testLocal.gradle"
+apply from: "$rootDir/gradle/testLocalUI.gradle"
 
 android {
     namespace 'space.jay.wirebarley.feature.exchangeRateCalculation'
