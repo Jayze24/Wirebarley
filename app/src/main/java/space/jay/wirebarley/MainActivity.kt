@@ -30,7 +30,8 @@ class MainActivity : ComponentActivity() {
                     ScreenExchangeRateCalculation(
                         stateUI = stateUI,
                         onChangedExchangeAmount = viewModel::setExchangeAmount,
-                        onChangedCountry = viewModel::selectCountry
+                        onChangedCountry = viewModel::selectCountry,
+                        onGetCurrency = viewModel::getCurrency
                     )
                 }
             }

@@ -24,7 +24,7 @@ class RetrofitNetworkCurrency @Inject internal constructor(
         return Success(
             DataCurrency(
                 success = true,
-                timestamp = 1682477884,
+                timestamp = System.currentTimeMillis() / 1000,
                 source = "USD",
                 quotes = mapOf(
                     "USDKRW" to 1336.965023,
