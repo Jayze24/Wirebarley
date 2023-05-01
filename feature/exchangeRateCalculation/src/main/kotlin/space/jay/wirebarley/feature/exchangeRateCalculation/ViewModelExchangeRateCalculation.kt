@@ -1,9 +1,10 @@
 package space.jay.wirebarley.feature.exchangeRateCalculation
 
-import android.app.Application
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -21,18 +22,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelExchangeRateCalculation @Inject constructor(
-    private val application : Application,
+    @ApplicationContext context : Context,
     private val useCaseGetCurrency : UseCaseGetCurrency,
     private val useCaseGetExchangeRateCalculation : UseCaseGetExchangeRateCalculation
 ) : ViewModel() {
 
     private val stateViewModelExchangedRateCalculation = MutableStateFlow(StateViewModelExchangedRateCalculation(isLoadingCurrency = true))
     val stateUIExchangedRateCalculation : StateFlow<StateUIExchangedRateCalculation> = stateViewModelExchangedRateCalculation
-        .map { it.toStateUi(application) }
+        .map { it.toStateUi(context) }
         .stateIn(
             viewModelScope,
             SharingStarted.Eagerly,
-            stateViewModelExchangedRateCalculation.value.toStateUi(application)
+            stateViewModelExchangedRateCalculation.value.toStateUi(context)
         )
 
     init {
