@@ -17,29 +17,29 @@ class RetrofitNetworkCurrency @Inject internal constructor(
 ) : BaseRetrofitNetwork(), SourceCurrency {
 
     override suspend fun getCurrency(from : TypeCountryAndQuote, to : List<TypeCountryAndQuote>) : Result<EntityCurrency> {
-        // return callApi(
-        //     api = { networkApi.getCurrency(source = from.quote, currencies = to.joinToString(",") { it.quote }) },
-        //     mapping = { it.body().asEntity(fromQuote = from, requestedQuote = to) }
-        // )
-        return Success(
-            DataCurrency(
-                success = true,
-                timestamp = System.currentTimeMillis() / 1000,
-                source = "USD",
-                quotes = mapOf(
-                    "USDKRW" to 1336.965023,
-                    "USDJPY" to 133.584497,
-                    "USDPHP" to 55.5915,
-                )
-            ).asEntity(
-                TypeCountryAndQuote.USA,
-                listOf(
-                    TypeCountryAndQuote.KOREA,
-                    TypeCountryAndQuote.JAPAN,
-                    TypeCountryAndQuote.PHILIPPINES
-                )
-            )
+        return callApi(
+            api = { networkApi.getCurrency(source = from.quote, currencies = to.joinToString(",") { it.quote }) },
+            mapping = { it.body().asEntity(fromQuote = from, requestedQuote = to) }
         )
+        // return Success(
+        //     DataCurrency(
+        //         success = true,
+        //         timestamp = System.currentTimeMillis() / 1000,
+        //         source = "USD",
+        //         quotes = mapOf(
+        //             "USDKRW" to 1336.965023,
+        //             "USDJPY" to 133.584497,
+        //             "USDPHP" to 55.5915,
+        //         )
+        //     ).asEntity(
+        //         TypeCountryAndQuote.USA,
+        //         listOf(
+        //             TypeCountryAndQuote.KOREA,
+        //             TypeCountryAndQuote.JAPAN,
+        //             TypeCountryAndQuote.PHILIPPINES
+        //         )
+        //     )
+        // )
     }
 
 }
