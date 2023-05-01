@@ -66,14 +66,7 @@ fun ScreenExchangeRateCalculation(
             )
 
             // 수취 금액
-            Text(
-                modifier = Modifier
-                    .padding(top = 48.dp)
-                    .fillMaxWidth(),
-                text = stateUI.receivedAmount,
-                style = MaterialTheme.typography.bodyLarge,
-                textAlign = TextAlign.Center
-            )
+            TextReceivedAmount(stateUI.receivedAmount)
         }
         // 갱신 버튼
         ButtonRefreshCurrency(onGetCurrency = onGetCurrency)
@@ -161,6 +154,18 @@ fun RowScope.TextContentTitle(title : Int) {
         text = "$text : ",
         style = MaterialTheme.typography.bodyMedium,
         textAlign = TextAlign.End
+    )
+}
+
+@Composable
+fun TextReceivedAmount(receivedAmount : String) {
+    Text(
+        modifier = Modifier
+            .padding(top = 48.dp)
+            .fillMaxWidth(),
+        text = receivedAmount,
+        style = MaterialTheme.typography.bodyLarge,
+        textAlign = TextAlign.Center
     )
 }
 
